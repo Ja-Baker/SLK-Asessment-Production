@@ -228,6 +228,21 @@ button.external-link-btn:focus {
     outline: none !important;
 }
 
+/* Special handling for skill buttons to ensure visibility */
+button.skill-btn,
+.skill-btn,
+button.skill-btn:link,
+button.skill-btn:visited,
+button.skill-btn:hover,
+button.skill-btn:active,
+button.skill-btn:focus {
+    background: linear-gradient(135deg, var(--green), #8fb93e) !important;
+    color: white !important;
+    text-decoration: none !important;
+    outline: none !important;
+    border: 2px solid transparent !important;
+}
+
 /* Primary Button - Main CTAs */
 .primary-btn {
     background: linear-gradient(135deg, var(--green), #8fb93e);
@@ -305,11 +320,11 @@ button.external-link-btn:focus {
     background: linear-gradient(135deg, #007a8c, var(--blue));
 }
 
-/* Skill Buttons - Smaller, inline */
+/* Skill Buttons - Green theme to match other buttons */
 .skill-btn {
-    background: var(--white);
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    background: linear-gradient(135deg, var(--green), #8fb93e) !important;
+    color: var(--white) !important;
+    border: 2px solid transparent !important;
     padding: 10px 20px;
     margin: 4px;
     display: inline-block;
@@ -319,9 +334,11 @@ button.external-link-btn:focus {
 }
 
 .skill-btn:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    border-color: var(--primary-color);
+    background: linear-gradient(135deg, #8fb93e, var(--green)) !important;
+    color: var(--white) !important;
+    border-color: transparent !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(160, 206, 78, 0.3);
 }
 
 /* Download buttons - Default styling */
@@ -348,6 +365,18 @@ button.external-link-btn:hover,
 .external-link-btn:hover {
     background: linear-gradient(135deg, #d64589, var(--primary-color)) !important;
     color: var(--white) !important;
+}
+
+/* Skill buttons - Green theme for visibility */
+.skill-btn {
+    background: linear-gradient(135deg, var(--green), #8fb93e);
+    color: var(--white);
+    width: auto;
+    min-width: 180px;
+}
+
+.skill-btn:hover {
+    background: linear-gradient(135deg, #8fb93e, var(--green));
 }
 
 /* Back to curriculum buttons - Gray theme */
