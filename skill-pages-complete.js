@@ -662,6 +662,13 @@ const skillPagesContent = {
         content: `<p>Strategies for word retrieval difficulties.</p>`
     },
 
+    categoryFluency: {
+        title: "Category Fluency",
+        category: "Fluency",
+        externalLink: externalLinksMapping.fluencySkills.wordFindingWordRetrieval,
+        content: `<p>Improving word retrieval through semantic categorization exercises, such as naming items from categories, identifying word relationships, and improving access to vocabulary organized by meaning.</p>`
+    },
+
     // SOCIAL COMMUNICATION SKILLS
     behaviorCommunication: {
         title: "Replacing Behaviors with Communication",
