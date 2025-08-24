@@ -193,6 +193,29 @@ button:active:not(:disabled) {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Link button states - Prevent text from disappearing */
+button:link,
+button:visited,
+button:active,
+.primary-btn:link,
+.primary-btn:visited, 
+.primary-btn:active,
+.secondary-btn:link,
+.secondary-btn:visited,
+.secondary-btn:active,
+.download-btn:link,
+.download-btn:visited,
+.download-btn:active,
+.external-link-btn:link,
+.external-link-btn:visited,
+.external-link-btn:active,
+.back-to-curriculum-btn:link,
+.back-to-curriculum-btn:visited,
+.back-to-curriculum-btn:active {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Primary Button - Main CTAs */
 .primary-btn {
     background: linear-gradient(135deg, var(--green), #8fb93e);
@@ -287,6 +310,39 @@ button:active:not(:disabled) {
     background: var(--primary-color);
     color: var(--white);
     border-color: var(--primary-color);
+}
+
+/* Download buttons - Default styling */
+.download-btn {
+    background: linear-gradient(135deg, var(--green), #8fb93e);
+    color: var(--white);
+    width: auto;
+    min-width: 200px;
+}
+
+.download-btn:hover {
+    background: linear-gradient(135deg, #8fb93e, var(--green));
+}
+
+/* External link buttons - Pink theme to match resource downloads */
+.external-link-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    width: 100%;
+}
+
+.external-link-btn:hover {
+    background: linear-gradient(135deg, #d64589, var(--primary-color));
+}
+
+/* Back to curriculum buttons - Gray theme */
+.back-to-curriculum-btn {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    color: var(--white);
+}
+
+.back-to-curriculum-btn:hover {
+    background: linear-gradient(135deg, #5a6268, #6c757d);
 }
 
 /* ================================
@@ -499,21 +555,25 @@ button:active:not(:disabled) {
     line-height: 1.6;
 }
 
+/* Resource card download buttons - Override universal styles */
 .resource-card .download-btn {
-    width: 100%;
-    padding: var(--spacing-sm) var(--spacing-md);
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
+    width: 100% !important;
+    padding: 12px 24px !important;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    color: white !important;
+    border: 2px solid transparent !important;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: auto;
+    margin-bottom: 0;
 }
 
 .resource-card .download-btn:hover {
+    background: linear-gradient(135deg, #d64589, var(--primary-color)) !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(238, 79, 156, 0.3);
+    box-shadow: 0 6px 20px rgba(238, 79, 156, 0.3);
 }
 
 /* Curriculum Levels */
@@ -1039,23 +1099,35 @@ button:active:not(:disabled) {
 }
 
 .external-link-btn {
-    background: linear-gradient(135deg, var(--blue) 0%, #007a8f 100%);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    color: white !important;
+    border: 2px solid transparent !important;
+    padding: 12px 24px !important;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     display: inline-block;
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
 }
 
 .external-link-btn:hover {
+    background: linear-gradient(135deg, #d64589, var(--primary-color)) !important;
+    color: white !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 147, 172, 0.3);
-    background: linear-gradient(135deg, #007a8f 0%, var(--blue) 100%);
+    box-shadow: 0 6px 20px rgba(238, 79, 156, 0.3);
+    text-decoration: none;
+}
+
+/* Ensure link text stays visible */
+.external-link-btn:link,
+.external-link-btn:visited,
+.external-link-btn:active {
+    color: white !important;
+    text-decoration: none;
 }
 
 .skill-category {
@@ -1072,19 +1144,26 @@ button:active:not(:disabled) {
 }
 
 .back-to-curriculum-btn {
-    background-color: var(--gray);
-    color: var(--black);
-    border: none;
-    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #6c757d, #5a6268) !important;
+    color: white !important;
+    border: 2px solid transparent !important;
+    padding: 12px 24px !important;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: all 0.3s ease;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: var(--spacing-sm);
 }
 
 .back-to-curriculum-btn:hover {
-    background-color: var(--dark-gray);
-    color: var(--white);
+    background: linear-gradient(135deg, #5a6268, #6c757d) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
+    text-decoration: none;
 }
 
 .activity-buttons {
@@ -1120,24 +1199,7 @@ button:active:not(:disabled) {
     margin: 1rem 0;
 }
 
-.download-btn, .resource-btn {
-    background: linear-gradient(135deg, var(--green) 0%, #8fb93e 100%);
-    color: white;
-    border: none;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 0.9rem;
-    text-align: left;
-    transition: all 0.3s ease;
-}
-
-.download-btn:hover, .resource-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(160, 206, 78, 0.3);
-    background: linear-gradient(135deg, #8fb93e 0%, var(--green) 100%);
-}
+/* Download button styles unified - removed duplicate */
 
 .tracking-buttons {
     display: grid;
