@@ -1,6 +1,36 @@
 // PDF Download Functions for SLK Curriculum
 // Based on the official SLK Modular Therapy Curriculum markdown specification
 
+// Initialize content when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        populateChecklistsContent();
+        populateHandoutsContent();
+        populateVisualsContent();
+        console.log('✅ Resource pages populated successfully');
+    } catch (error) {
+        console.error('❌ Error populating resource content:', error);
+        // Fallback to show basic content
+        populateBasicContent();
+    }
+});
+
+// Fallback function if content fails to load
+function populateBasicContent() {
+    const sections = ['checklistsContent', 'handoutsContent', 'visualsContent'];
+    sections.forEach(sectionId => {
+        const container = document.getElementById(sectionId);
+        if (container && container.innerHTML.trim() === '') {
+            container.innerHTML = `
+                <div class="error-message">
+                    <p>Content is loading... If this persists, please refresh the page.</p>
+                    <button class="download-btn" onclick="location.reload()">Refresh Page</button>
+                </div>
+            `;
+        }
+    });
+}
+
 // Main PDF generation function that handles all download types
 function generateFunctionalPDF(type, resourceId) {
     const pdfData = getPDFData(type, resourceId);
@@ -200,5 +230,198 @@ window.downloadHandout = downloadHandout;
 window.downloadVisual = downloadVisual;
 window.downloadResource = downloadResource;
 window.downloadSkillResource = downloadSkillResource;
+
+// Content population functions
+function populateChecklistsContent() {
+    const container = document.getElementById('checklistsContent');
+    if (!container) return;
+    
+    const checklistsHTML = `
+        <div class="step-section">
+            <h3>Step 1: General Screening Checklist</h3>
+            <p>This will narrow down the specific communication domain(s) that need to be addressed.</p>
+            <div class="download-grid">
+                <button class="download-btn" onclick="downloadChecklist('screening-general')">
+                    📋 Download the Screening Checklist
+                </button>
+            </div>
+        </div>
+        
+        <div class="step-section">
+            <h3>Step 2: Progress Monitoring Tools and In-Depth Checklists</h3>
+            <p>Once you have identified the area(s) that you want to pursue, use the corresponding progress monitoring tool and checklist to gather more data. This will help you track progress over time and identify the correct curriculum for this individual.</p>
+            
+            <div class="monitoring-tools">
+                <div class="tool-item">
+                    <h4>Speech Sounds</h4>
+                    <p>Individuals with speech sound problems have difficulty pronouncing sounds correctly. Their speech is difficult to understand. Fill out the Speech Sounds Progress Monitoring Tool to dive deeper.</p>
+                    <button class="download-btn" onclick="downloadChecklist('speech-sounds')">
+                        🗣️ Speech Sound Progress Monitoring Tool
+                    </button>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>Language</h4>
+                    <p>Individuals with language difficulties struggle to understand or use words effectively. This can impact their ability to follow directions, express thoughts, or build sentences correctly.</p>
+                    <button class="download-btn" onclick="downloadChecklist('language-development')">
+                        📝 Language Progress Monitoring Tool
+                    </button>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>Voice/Resonance</h4>
+                    <p>Individuals with voice or resonance concerns may have voices that sound hoarse, too nasal, too quiet, or otherwise unusual.</p>
+                    <button class="download-btn" onclick="downloadChecklist('voice-resonance')">
+                        🎵 Voice/Resonance Progress Monitoring Tool
+                    </button>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>Fluency</h4>
+                    <p>Individuals with fluency difficulties may experience stuttering or interruptions in their speech.</p>
+                    <button class="download-btn" onclick="downloadChecklist('fluency-voice')">
+                        🔄 Fluency Progress Monitoring Tool
+                    </button>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>Functional Communication</h4>
+                    <p>Individuals with functional communication difficulties struggle to get their needs met using speech, gestures, or other means of communication.</p>
+                    <button class="download-btn" onclick="downloadChecklist('early-communication')">
+                        💬 Functional Communication Progress Monitoring Tool
+                    </button>
+                </div>
+                
+                <div class="tool-item">
+                    <h4>Social Communication</h4>
+                    <p>Individuals with social communication challenges may struggle with conversational skills, understanding social cues, or using language appropriately in different social interactions.</p>
+                    <button class="download-btn" onclick="downloadChecklist('social-communication')">
+                        👥 Social Communication Progress Monitoring Tool
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = checklistsHTML;
+}
+
+function populateHandoutsContent() {
+    const container = document.getElementById('handoutsContent');
+    if (!container) return;
+    
+    const handoutsHTML = `
+        <div class="resource-grid">
+            <div class="resource-card">
+                <h4>🏠 Early Communication Home Support</h4>
+                <p>Handouts for caregivers supporting early communication development at home.</p>
+                <button class="download-btn" onclick="downloadHandout('early-communication-home')">
+                    Access Handouts
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>🗣️ Speech Sounds Home Practice</h4>
+                <p>Home practice activities for speech sound development.</p>
+                <button class="download-btn" onclick="downloadHandout('speech-sounds-home')">
+                    Access Handouts
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>📱 AAC Implementation Guide</h4>
+                <p>Comprehensive guide for implementing AAC systems.</p>
+                <button class="download-btn" onclick="downloadHandout('aac-implementation')">
+                    Access Handouts
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>🏫 Classroom Communication Supports</h4>
+                <p>Resources for teachers and educational professionals.</p>
+                <button class="download-btn" onclick="downloadHandout('classroom-supports')">
+                    Access Handouts
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>🔄 Fluency Support Strategies</h4>
+                <p>Strategies and support materials for fluency challenges.</p>
+                <button class="download-btn" onclick="downloadHandout('fluency-support')">
+                    Access Handouts
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>👥 Social Communication Home Strategies</h4>
+                <p>Home-based activities for social communication development.</p>
+                <button class="download-btn" onclick="downloadHandout('social-communication-home')">
+                    Access Handouts
+                </button>
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = handoutsHTML;
+}
+
+function populateVisualsContent() {
+    const container = document.getElementById('visualsContent');
+    if (!container) return;
+    
+    const visualsHTML = `
+        <div class="resource-grid">
+            <div class="resource-card">
+                <h4>🗣️ Core Vocabulary Visual Cards</h4>
+                <p>Essential visual cards for core vocabulary development and AAC support.</p>
+                <button class="download-btn" onclick="downloadVisual('core-vocabulary')">
+                    Access Visual Cards
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>📅 Visual Schedule Templates</h4>
+                <p>Customizable visual schedules for daily routines and activities.</p>
+                <button class="download-btn" onclick="downloadVisual('visual-schedules')">
+                    Access Schedules
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>📖 Social Story Templates</h4>
+                <p>Templates for creating personalized social stories and scripts.</p>
+                <button class="download-btn" onclick="downloadVisual('social-stories')">
+                    Access Stories
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>🎯 Choice Boards</h4>
+                <p>Visual choice boards for decision-making and communication.</p>
+                <button class="download-btn" onclick="downloadVisual('choice-boards')">
+                    Access Choice Boards
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>😊 Emotion Regulation Visuals</h4>
+                <p>Visual supports for emotional regulation and self-calming strategies.</p>
+                <button class="download-btn" onclick="downloadVisual('emotion-regulation')">
+                    Access Emotion Tools
+                </button>
+            </div>
+            
+            <div class="resource-card">
+                <h4>🏫 Classroom Communication Aids</h4>
+                <p>Visual supports specifically designed for classroom environments.</p>
+                <button class="download-btn" onclick="downloadVisual('classroom-aids')">
+                    Access Classroom Aids
+                </button>
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = visualsHTML;
+}
 
 console.log('✅ PDF download functions loaded and available globally');
