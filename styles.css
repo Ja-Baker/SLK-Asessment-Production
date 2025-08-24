@@ -143,98 +143,205 @@ p {
     line-height: 1.5;
 }
 
-/* Buttons */
-.primary-btn, .secondary-btn, .choice-btn, .area-btn, .curriculum-btn {
+/* ================================
+   UNIFIED BUTTON SYSTEM
+   ================================ */
+
+/* Base Button Styles - Applied to ALL buttons */
+button,
+.primary-btn,
+.secondary-btn,
+.choice-btn,
+.area-btn,
+.curriculum-btn,
+.skill-btn,
+.activity-btn,
+.download-btn,
+.resource-btn,
+.external-link-btn,
+.level-btn,
+.tracking-btn,
+.back-to-curriculum-btn {
     font-family: 'Candara', 'Calibri', 'Arial', sans-serif;
     font-weight: bold;
-    font-size: 1.1rem;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: none;
+    font-size: 1rem;
+    padding: 12px 24px;
+    border: 2px solid transparent;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: center;
     display: inline-block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    line-height: 1.5;
+    white-space: normal;
+    word-wrap: break-word;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Button hover base effect */
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Button active state */
+button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Primary Button - Main CTAs */
+.primary-btn {
+    background: linear-gradient(135deg, var(--green), #8fb93e);
+    color: var(--white);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto var(--spacing-sm);
+    display: block;
+}
+
+.primary-btn:hover {
+    background: linear-gradient(135deg, #8fb93e, var(--green));
+}
+
+/* Secondary Button - Secondary actions */
+.secondary-btn {
+    background: linear-gradient(135deg, var(--blue), #007a8c);
+    color: var(--white);
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto var(--spacing-sm);
+    display: block;
+}
+
+.secondary-btn:hover {
+    background: linear-gradient(135deg, #007a8c, var(--blue));
+}
+
+/* Choice Buttons - Yes/No decisions */
+.choice-btn {
+    width: 200px;
+    margin: 0 var(--spacing-sm);
+    display: inline-block;
+}
+
+.yes-btn {
+    background: linear-gradient(135deg, var(--green), #8fb93e);
+    color: var(--white);
+}
+
+.yes-btn:hover {
+    background: linear-gradient(135deg, #8fb93e, var(--green));
+}
+
+.no-btn {
+    background: linear-gradient(135deg, var(--pink), #d64589);
+    color: var(--white);
+}
+
+.no-btn:hover {
+    background: linear-gradient(135deg, #d64589, var(--pink));
+}
+
+/* Area Selection Buttons */
+.area-btn {
+    background: linear-gradient(135deg, var(--purple), #9d6a9f);
+    color: var(--white);
     width: 100%;
     margin-bottom: var(--spacing-sm);
 }
 
-.primary-btn {
-    background-color: var(--green);
-    color: var(--white);
-}
-
-.primary-btn:hover {
-    background-color: #8fb93e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.secondary-btn {
-    background-color: var(--blue);
-    color: var(--white);
-}
-
-.secondary-btn:hover {
-    background-color: #007a8c;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.choice-btn {
-    width: 200px;
-    margin: 0 var(--spacing-sm);
-}
-
-.yes-btn {
-    background-color: var(--green);
-    color: var(--white);
-}
-
-.no-btn {
-    background-color: var(--pink);
-    color: var(--white);
-}
-
-.area-btn {
-    background-color: var(--purple);
-    color: var(--white);
-    margin-top: var(--spacing-sm);
-}
-
 .area-btn:hover {
-    background-color: #9d6a9f;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #9d6a9f, var(--purple));
 }
 
+/* Curriculum Navigation Buttons */
 .curriculum-btn {
-    background-color: var(--blue);
+    background: linear-gradient(135deg, var(--blue), #007a8c);
     color: var(--white);
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
 }
 
 .curriculum-btn:hover {
-    background-color: #007a8c;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #007a8c, var(--blue));
 }
 
-/* Layout Components */
+/* Skill Buttons - Smaller, inline */
+.skill-btn {
+    background: var(--white);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 10px 20px;
+    margin: 4px;
+    display: inline-block;
+    width: auto;
+    min-width: 180px;
+    font-size: 0.95rem;
+}
+
+.skill-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+/* ================================
+   LAYOUT COMPONENTS & CONTAINERS
+   ================================ */
+
+/* Page transitions */
+.page {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Welcome section with improved styling */
 .welcome-section {
     text-align: center;
     margin-bottom: var(--spacing-lg);
-    padding: var(--spacing-lg);
-    background: linear-gradient(135deg, #f8f4ff 0%, #fff0f8 100%);
-    border-radius: 12px;
-    border: 1px solid #e8e0f5;
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, rgba(238, 79, 156, 0.08), rgba(160, 206, 78, 0.08));
+    border-radius: 16px;
+    border: 2px solid rgba(238, 79, 156, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* Button containers with consistent spacing */
 .main-buttons {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
     max-width: 600px;
     margin: 0 auto var(--spacing-lg);
+    padding: 0 var(--spacing-sm);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin: var(--spacing-md) 0;
+}
+
+/* Skill buttons container */
+.skill-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    margin: var(--spacing-md) 0;
 }
 
 .section-divider {
@@ -278,25 +385,56 @@ p {
     margin-top: var(--spacing-lg);
 }
 
+/* Area Selection Grid - Enhanced */
 .area-selection {
     display: grid;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: var(--spacing-sm);
 }
 
 .area-card {
-    background-color: #ffffff;
-    padding: var(--spacing-md);
-    border-radius: 12px;
-    border: 2px solid #e9ecef;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, #ffffff, #fafbfc);
+    padding: var(--spacing-lg);
+    border-radius: 16px;
+    border: 2px solid rgba(178, 122, 180, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.area-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--green));
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .area-card:hover {
     border-color: var(--purple);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(178, 122, 180, 0.2);
+}
+
+.area-card:hover::before {
+    opacity: 1;
+}
+
+.area-card h3 {
+    color: var(--purple);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.2rem;
+}
+
+.area-card p {
+    color: #5f6368;
+    line-height: 1.6;
 }
 
 .area-card ul {
@@ -527,21 +665,19 @@ p {
     gap: 1rem;
 }
 
+/* Activity buttons - Pink themed */
 .activity-btn {
-    background-color: var(--pink);
+    background: linear-gradient(135deg, var(--pink), #d64487);
     color: var(--white);
-    border: none;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    padding: 10px 20px;
+    margin: 4px;
+    display: inline-block;
+    width: auto;
+    min-width: 150px;
 }
 
 .activity-btn:hover {
-    background-color: #d64487;
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #d64487, var(--pink));
 }
 
 /* Responsive Design */
@@ -747,22 +883,7 @@ p {
     margin-top: var(--spacing-md);
 }
 
-.activity-btn {
-    background-color: var(--blue);
-    color: var(--white);
-    padding: var(--spacing-sm);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.activity-btn:hover {
-    background-color: #007a8c;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+/* Activity button style unified - removed duplicate */
 
 /* Responsive Design for Mobile */
 @media (max-width: 768px) {
