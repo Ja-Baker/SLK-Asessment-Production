@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Curriculum Levels</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="nav-header">
+            <h1 class="site-title">Curriculum Levels Test</h1>
+        </header>
+
+        <main id="content">
+            <div class="page active">
+                <h2>Testing Curriculum Format</h2>
+                <p>Click on the buttons below to test curriculum pages:</p>
+                
+                <div class="button-group">
+                    <button class="primary-btn" onclick="testCurriculum('earlyInteractions')">Test Early Interactions</button>
+                    <button class="primary-btn" onclick="testCurriculum('abstractLanguage')">Test Abstract Language</button>
+                    <button class="primary-btn" onclick="testCurriculum('grammarSyntax')">Test Grammar/Syntax</button>
+                </div>
+                
+                <div id="test-output" style="margin-top: 2rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
+                    <p>Click a button to load curriculum content...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="curriculum-content-2.js"></script>
+    <script src="curriculum-pages-with-levels.js"></script>
+    <script>
+        function testCurriculum(curriculumId) {
+            const output = document.getElementById('test-output');
+            
+            // Check if curriculum data exists
+            if (window.curriculumContent && window.curriculumContent[curriculumId]) {
+                const data = window.curriculumContent[curriculumId];
+                let html = `<h3>Found ${curriculumId} curriculum data!</h3>`;
+                html += '<ul>';
+                html += `<li>Beginner: ${data.beginner ? '✓' : '✗'}</li>`;
+                html += `<li>Intermediate: ${data.intermediate ? '✓' : '✗'}</li>`;
+                html += `<li>Advanced: ${data.advanced ? '✓' : '✗'}</li>`;
+                html += '</ul>';
+                
+                if (data.beginner) {
+                    html += `<h4>Beginner Level:</h4>`;
+                    html += `<p>${data.beginner.title}</p>`;
+                    html += `<p>Skills: ${data.beginner.skills ? data.beginner.skills.join(', ') : 'None'}</p>`;
+                }
+                
+                output.innerHTML = html;
+            } else if (curriculumId === 'earlyInteractions' && window.earlyInteractionsCurriculum) {
+                const data = window.earlyInteractionsCurriculum;
+                let html = `<h3>Found ${curriculumId} curriculum data!</h3>`;
+                html += '<ul>';
+                html += `<li>Beginner: ${data.beginner ? '✓' : '✗'}</li>`;
+                html += `<li>Intermediate: ${data.intermediate ? '✓' : '✗'}</li>`;
+                html += `<li>Advanced: ${data.advanced ? '✓' : '✗'}</li>`;
+                html += '</ul>';
+                
+                if (data.beginner) {
+                    html += `<h4>Beginner Level:</h4>`;
+                    html += `<p>${data.beginner.title}</p>`;
+                    html += `<p>Skills: ${data.beginner.skills ? data.beginner.skills.join(', ') : 'None'}</p>`;
+                }
+                
+                output.innerHTML = html;
+            } else {
+                output.innerHTML = `<p style="color: red;">No curriculum data found for ${curriculumId}</p>`;
+            }
+        }
+        
+        // Check what's loaded
+        window.addEventListener('load', function() {
+            console.log('curriculumContent available:', typeof window.curriculumContent !== 'undefined');
+            console.log('earlyInteractionsCurriculum available:', typeof window.earlyInteractionsCurriculum !== 'undefined');
+            
+            if (window.curriculumContent) {
+                console.log('Available curriculums:', Object.keys(window.curriculumContent));
+            }
+        });
+    </script>
+</body>
+</html>
