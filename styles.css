@@ -923,6 +923,98 @@ button.external-link-btn:hover,
     margin-bottom: var(--spacing-sm);
 }
 
+/* Level Selection Cards */
+.level-selection {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin: var(--spacing-lg) 0;
+}
+
+.level-card {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    border: 2px solid rgba(238, 79, 156, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.level-card:hover {
+    border-color: var(--pink);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(238, 79, 156, 0.15);
+}
+
+.level-card h4 {
+    color: var(--purple);
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.2rem;
+}
+
+.level-card .age-range {
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: var(--spacing-sm);
+}
+
+.level-card ul {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-sm) 0;
+}
+
+.level-card li {
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-md);
+    position: relative;
+    color: var(--black);
+    font-weight: normal;
+}
+
+.level-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: bold;
+}
+
+/* Level Sections */
+.level-section {
+    margin: var(--spacing-md) 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+/* Level Content Areas */
+.level-content {
+    display: none;
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, #ffffff, #fafbfc);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    animation: fadeIn 0.3s ease-in;
+}
+
+.level-content.active,
+.level-content:target {
+    display: block;
+}
+
+.level-details {
+    padding: var(--spacing-sm);
+}
+
+.level-details h4 {
+    color: var(--purple);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+}
+
 /* Expandable Sections */
 .expandable-section {
     margin-bottom: var(--spacing-sm);

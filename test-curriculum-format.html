@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Curriculum Format</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="nav-header">
+            <h1 class="site-title">Curriculum Format Test</h1>
+        </header>
+
+        <main id="content">
+            <div class="page active">
+                <h2>Test Curriculum with Beginner/Intermediate/Advanced Levels</h2>
+                <p>This test page demonstrates the restored curriculum format with three levels.</p>
+                
+                <!-- Level Selection Cards -->
+                <div class="level-selection">
+                    <div class="level-card" onclick="toggleLevelContent('test-beginner')">
+                        <h4>Beginner Level: Building Foundation</h4>
+                        <p class="age-range">(Ages: 2-4 yrs and beyond)</p>
+                        <ul>
+                            <li>Basic skill 1</li>
+                            <li>Basic skill 2</li>
+                            <li>Basic skill 3</li>
+                        </ul>
+                        <button class="area-btn">Choose Beginner Level</button>
+                    </div>
+                    
+                    <div class="level-card" onclick="toggleLevelContent('test-intermediate')">
+                        <h4>Intermediate Level: Expanding Skills</h4>
+                        <p class="age-range">(Ages: 4-6 yrs and beyond)</p>
+                        <ul>
+                            <li>Intermediate skill 1</li>
+                            <li>Intermediate skill 2</li>
+                            <li>Intermediate skill 3</li>
+                        </ul>
+                        <button class="area-btn">Choose Intermediate Level</button>
+                    </div>
+                    
+                    <div class="level-card" onclick="toggleLevelContent('test-advanced')">
+                        <h4>Advanced Level: Mastery</h4>
+                        <p class="age-range">(Ages: 6+ yrs and beyond)</p>
+                        <ul>
+                            <li>Advanced skill 1</li>
+                            <li>Advanced skill 2</li>
+                            <li>Advanced skill 3</li>
+                        </ul>
+                        <button class="area-btn">Choose Advanced Level</button>
+                    </div>
+                </div>
+                
+                <!-- Level Content Sections -->
+                <div id="test-beginner-content" class="level-content">
+                    <div class="level-details">
+                        <h3>Beginner Level Content</h3>
+                        <p>This is the beginner level content with detailed therapy activities and goals.</p>
+                        
+                        <div class="goal-box">
+                            <h4>Sample Goal:</h4>
+                            <p>By the end of the reporting period, the student will demonstrate beginner-level skills with 80% accuracy.</p>
+                        </div>
+                        
+                        <table class="rubric-table">
+                            <tr>
+                                <th>Score</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>5 – Mastery</td>
+                                <td>Consistently demonstrates skill</td>
+                            </tr>
+                            <tr>
+                                <td>3 – Developing</td>
+                                <td>Inconsistently demonstrates skill</td>
+                            </tr>
+                            <tr>
+                                <td>1 – Beginning</td>
+                                <td>Rarely demonstrates skill</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="test-intermediate-content" class="level-content">
+                    <div class="level-details">
+                        <h3>Intermediate Level Content</h3>
+                        <p>This is the intermediate level content with more complex activities.</p>
+                        
+                        <div class="goal-box">
+                            <h4>Sample Goal:</h4>
+                            <p>By the end of the reporting period, the student will demonstrate intermediate-level skills with 85% accuracy.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="test-advanced-content" class="level-content">
+                    <div class="level-details">
+                        <h3>Advanced Level Content</h3>
+                        <p>This is the advanced level content with mastery-level activities.</p>
+                        
+                        <div class="goal-box">
+                            <h4>Sample Goal:</h4>
+                            <p>By the end of the reporting period, the student will demonstrate advanced-level skills with 90% accuracy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="curriculum-format.js"></script>
+    <script>
+        // Test the toggle function
+        function toggleLevelContent(levelId) {
+            // Hide all level contents
+            const allContents = document.querySelectorAll('.level-content');
+            allContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Show the selected level content
+            const selectedContent = document.getElementById(`${levelId}-content`);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+                selectedContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    </script>
+</body>
+</html>
