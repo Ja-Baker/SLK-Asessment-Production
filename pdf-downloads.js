@@ -1,4 +1,4 @@
-// PDF Download Functions for SLK Curriculum
+// PDF Download Functions for SLK Assessment Tool
 // Based on the official SLK Modular Therapy Curriculum markdown specification
 
 // Main PDF generation function that handles all download types

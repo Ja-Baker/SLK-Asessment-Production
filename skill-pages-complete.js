@@ -1,4 +1,4 @@
-// Updated skill pages content with ALL external links from SLK Curriculum
+// Updated skill pages content with ALL external links from SLK Assessment Tool
 // This file integrates all 112 hub.speechandlanguagekids.com links
 
 const skillPagesContent = {

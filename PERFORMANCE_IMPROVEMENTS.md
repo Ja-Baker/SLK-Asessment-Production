@@ -1,4 +1,4 @@
-# SLK Curriculum Performance Optimizations
+# SLK Assessment Tool Performance Optimizations
 
 ## Performance Issues Identified
 
@@ -162,7 +162,7 @@ Content-Encoding = "gzip"
 
 ## Conclusion
 
-These optimizations transform the SLK Curriculum from a slow-loading application to a **high-performance, user-friendly tool**:
+These optimizations transform the SLK Assessment Tool from a slow-loading application to a **high-performance, user-friendly tool**:
 
 🎯 **60-80% faster load times**  
 📱 **Optimized mobile experience**  

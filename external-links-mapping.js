@@ -1,4 +1,4 @@
-// Complete External Links Mapping from SLK Curriculum Specification
+// Complete External Links Mapping from SLK Assessment Tool Specification
 // Total: 119 external links (112 hub.speechandlanguagekids.com + 7 Dropbox PDFs)
 
 const externalLinksMapping = {

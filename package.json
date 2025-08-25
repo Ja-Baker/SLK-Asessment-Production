@@ -1,7 +1,7 @@
 {
   "name": "slk-unified",
   "version": "2.3.0",
-  "description": "SLK Modular Therapy Curriculum - Unified Version",
+  "description": "SLK Assessment Tool - Unified Version",
   "private": true,
   "engines": {
     "node": ">=18"

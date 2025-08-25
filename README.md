@@ -1,6 +1,6 @@
-# SLK Curriculum Planning Tool
+# SLK Assessment Tool
 
-A comprehensive web application for speech-language therapy curriculum planning.
+A comprehensive web application for speech-language therapy curriculum assessment.
 
 ## Features
 

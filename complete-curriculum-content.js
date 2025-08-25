@@ -1,4 +1,4 @@
-// Complete SLK Curriculum Content based on the official markdown specification
+// Complete SLK Assessment Tool Content based on the official markdown specification
 // This file contains all curriculum content, skill pages, and proper navigation structure
 
 // All curriculum data organized by category
