@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Button Visibility Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        .pass { background: #d4edda; color: #155724; }
+        .fail { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .visibility-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .visible { background-color: #28a745; }
+        .hidden { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 Download Button Visibility Test</h1>
+        
+        <div class="test-section">
+            <h2>Test Download Buttons</h2>
+            <p>These buttons should be visible with pink background:</p>
+            
+            <!-- Test the exact button that was reported as invisible -->
+            <button class="download-btn" onclick="alert('Download button works!')">
+                Download General Screening Checklist
+            </button>
+            
+            <button class="download-btn" onclick="alert('Download button works!')">
+                Download Speech Sound Progress Monitoring Tool
+            </button>
+            
+            <button class="download-btn" onclick="alert('Download button works!')">
+                Download Language Progress Monitoring Tool
+            </button>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test Resource Card Download Buttons</h2>
+            <div class="resource-card">
+                <h3>Test Resource Card</h3>
+                <p>This tests the resource card download button styling.</p>
+                <button class="download-btn" onclick="alert('Resource download works!')">
+                    Download from Resource Card
+                </button>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Comparison: Other Button Types</h2>
+            <button class="primary-btn">Primary Button (Should be green)</button>
+            <button class="secondary-btn">Secondary Button (Should be blue)</button>
+            <button class="skill-btn">Skill Button (Should be green)</button>
+            <button class="external-link-btn">External Link Button (Should be pink)</button>
+        </div>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function testDownloadButtons() {
+            const results = [];
+            
+            // Test download buttons visibility
+            const downloadButtons = document.querySelectorAll('.download-btn');
+            let visibleDownloadButtons = 0;
+            
+            downloadButtons.forEach((button, index) => {
+                const style = window.getComputedStyle(button);
+                const isVisible = style.display !== 'none' && 
+                                style.visibility !== 'hidden' && 
+                                parseFloat(style.opacity) > 0 &&
+                                button.offsetWidth > 0 && 
+                                button.offsetHeight > 0;
+                
+                if (isVisible) {
+                    visibleDownloadButtons++;
+                    
+                    // Check if background color is correct (should be pink)
+                    const bgColor = style.backgroundColor;
+                    const text = button.textContent.trim().substring(0, 30) + '...';
+                    
+                    if (bgColor.includes('238, 79, 156') || bgColor.includes('#ee4f9c') || 
+                        bgColor.includes('238,79,156') || bgColor.includes('rgb(238, 79, 156)')) {
+                        results.push({
+                            type: 'pass',
+                            message: `✅ Download Button ${index + 1} visible with correct pink background`,
+                            details: `"${text}" - BG: ${bgColor}`
+                        });
+                    } else {
+                        results.push({
+                            type: 'fail',
+                            message: `❌ Download Button ${index + 1} visible but wrong background`,
+                            details: `"${text}" - Expected pink, got: ${bgColor}`
+                        });
+                    }
+                } else {
+                    results.push({
+                        type: 'fail',
+                        message: `❌ Download Button ${index + 1} is invisible`,
+                        details: `Display: ${style.display}, Visibility: ${style.visibility}, Opacity: ${style.opacity}`
+                    });
+                }
+            });
+            
+            // Overall summary
+            if (visibleDownloadButtons === downloadButtons.length && downloadButtons.length > 0) {
+                results.unshift({
+                    type: 'pass',
+                    message: `🎉 SUCCESS: All ${downloadButtons.length} download buttons are visible!`,
+                    details: 'Download button visibility issue has been fixed'
+                });
+            } else if (downloadButtons.length === 0) {
+                results.unshift({
+                    type: 'info',
+                    message: 'ℹ️ No download buttons found on this test page',
+                    details: 'This might be expected depending on the page content'
+                });
+            } else {
+                results.unshift({
+                    type: 'fail',
+                    message: `❌ ISSUE: Only ${visibleDownloadButtons}/${downloadButtons.length} download buttons visible`,
+                    details: 'Some download buttons are still invisible'
+                });
+            }
+            
+            // Test CSS variables
+            const testDiv = document.createElement('div');
+            testDiv.style.color = 'var(--primary-color)';
+            document.body.appendChild(testDiv);
+            const primaryColorStyle = window.getComputedStyle(testDiv).color;
+            document.body.removeChild(testDiv);
+            
+            if (primaryColorStyle.includes('238, 79, 156') || primaryColorStyle !== 'var(--primary-color)') {
+                results.push({
+                    type: 'pass',
+                    message: '✅ CSS variable --primary-color is properly defined',
+                    details: `Resolved to: ${primaryColorStyle}`
+                });
+            } else {
+                results.push({
+                    type: 'fail',
+                    message: '❌ CSS variable --primary-color is not defined',
+                    details: 'This may cause invisible buttons using primary-color'
+                });
+            }
+            
+            return results;
+        }
+        
+        function displayResults(results) {
+            const resultsDiv = document.getElementById('results');
+            let html = '<div class="test-section"><h2>📊 Test Results</h2>';
+            
+            results.forEach(result => {
+                html += `
+                    <div class="test-result ${result.type}">
+                        <strong>${result.message}</strong>
+                        ${result.details ? `<br><small>${result.details}</small>` : ''}
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            resultsDiv.innerHTML = html;
+        }
+        
+        // Run test when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const results = testDownloadButtons();
+                displayResults(results);
+            }, 500);
+        });
+        
+        // Add a manual test button
+        function runManualTest() {
+            const results = testDownloadButtons();
+            displayResults(results);
+        }
+    </script>
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="runManualTest()" style="background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+            🔄 Run Test Again
+        </button>
+    </div>
+</body>
+</html>

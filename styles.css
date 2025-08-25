@@ -12,6 +12,11 @@
     --blue: #0093ac;
     --purple: #b27ab4;
     
+    /* Alias colors for unified system */
+    --primary-color: #ee4f9c;
+    --secondary-color: #d64589;
+    --border-color: #e9ecef;
+    
     /* Neutral Colors */
     --white: #ffffff;
     --light-gray: #f5f5f5;
@@ -341,16 +346,30 @@ button.skill-btn:focus {
     box-shadow: 0 6px 20px rgba(160, 206, 78, 0.3);
 }
 
-/* Download buttons - Default styling */
-.download-btn {
-    background: linear-gradient(135deg, var(--green), #8fb93e);
-    color: var(--white);
-    width: auto;
-    min-width: 200px;
+/* Download buttons - Enhanced styling with high specificity */
+.download-btn,
+button.download-btn {
+    background: linear-gradient(135deg, var(--pink), #d64589) !important;
+    color: var(--white) !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto var(--spacing-sm) !important;
+    display: block !important;
+    font-size: 1rem !important;
+    padding: 12px 24px !important;
+    border: 2px solid transparent !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
 }
 
-.download-btn:hover {
-    background: linear-gradient(135deg, #8fb93e, var(--green));
+.download-btn:hover,
+button.download-btn:hover {
+    background: linear-gradient(135deg, #d64589, var(--pink)) !important;
+    color: var(--white) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(238, 79, 156, 0.3) !important;
 }
 
 /* External link buttons - Pink theme to match resource downloads */
