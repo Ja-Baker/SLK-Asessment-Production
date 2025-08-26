@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify All 29 Curriculum Pages</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .test-card {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+        }
+        .test-card.success {
+            border-color: #a0ce4e;
+            background: #f0f8f0;
+        }
+        .test-card.error {
+            border-color: #ee4f9c;
+            background: #fff0f5;
+        }
+        .status-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .summary-box {
+            padding: 1rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #f5f5f5, #fafafa);
+            border: 2px solid #b27ab4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="nav-header">
+            <h1 class="site-title">✅ Verify All 29 Curriculum Pages</h1>
+        </header>
+
+        <main id="content">
+            <div class="page active">
+                <h2>Comprehensive Curriculum Verification</h2>
+                <p>This page verifies that ALL 29 curriculum pages have the beginner/intermediate/advanced format correctly implemented.</p>
+                
+                <div class="summary-box">
+                    <h3>Test Summary</h3>
+                    <p>Total Curriculums: <strong id="total">0</strong></p>
+                    <p>Successfully Loaded: <strong id="success" style="color: #a0ce4e;">0</strong></p>
+                    <p>Failed/Missing: <strong id="failed" style="color: #ee4f9c;">0</strong></p>
+                    <button class="primary-btn" onclick="runAllTests()">Run All Tests</button>
+                </div>
+
+                <div class="test-grid" id="testGrid">
+                    <!-- Test cards will be inserted here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="curriculum.js"></script>
+    <script>
+        // Complete list of all 29 curriculum pages from the MD document
+        const allCurriculumPages = [
+            // Functional Communication (4)
+            { id: 'earlyInteractions', name: 'Early Interactions', page: 14 },
+            { id: 'analyticLanguage', name: 'Analytic Language Processor', page: 15 },
+            { id: 'gestaltLanguage', name: 'Gestalt Language Processor', page: 16 },
+            { id: 'aacCurriculum', name: 'AAC', page: 17 },
+            
+            // Speech Sounds (5)
+            { id: 'articulation', name: 'Articulation', page: 18 },
+            { id: 'phonology', name: 'Phonology', page: 19 },
+            { id: 'motorSpeech', name: 'Motor Speech', page: 20 },
+            { id: 'mumbling', name: 'Mumbling', page: 21 },
+            { id: 'cyclesPhonology', name: 'Cycles Phonology', page: 22 },
+            
+            // Language (8)
+            { id: 'followingDirections', name: 'Following Directions', page: 23 },
+            { id: 'askingAnswering', name: 'Asking & Answering Questions', page: 24 },
+            { id: 'sequencing', name: 'Sequencing & Retelling', page: 25 },
+            { id: 'abstractLanguage', name: 'Abstract Language', page: 26 },
+            { id: 'grammarSyntax', name: 'Grammar/Syntax', page: 27 },
+            { id: 'vocabulary', name: 'Vocabulary', page: 28 },
+            { id: 'literacyFoundations', name: 'Literacy Foundations', page: 29 },
+            { id: 'cyclesLanguage', name: 'Cycles Language', page: 30 },
+            
+            // Voice/Resonance (4)
+            { id: 'healthyVoice', name: 'Healthy Voice Use', page: 31 },
+            { id: 'voiceCurriculum', name: 'Voice', page: 32 },
+            { id: 'resonance', name: 'Resonance', page: 33 },
+            { id: 'prosody', name: 'Prosody', page: 34 },
+            
+            // Social Communication (4)
+            { id: 'socialAwareness', name: 'Social Awareness', page: 35 },
+            { id: 'emotionalRegulation', name: 'Emotional Regulation', page: 36 },
+            { id: 'conversationalSkills', name: 'Conversational Skills', page: 37 },
+            { id: 'selectiveMutism', name: 'Selective Mutism', page: 38 },
+            
+            // Fluency (4)
+            { id: 'foundationsFluency', name: 'Foundations for Fluency', page: 39 },
+            { id: 'wordFinding', name: 'Word Finding/Retrieval', page: 40 },
+            { id: 'stuttering', name: 'Stuttering', page: 41 },
+            { id: 'cluttering', name: 'Cluttering', page: 42 }
+        ];
+
+        function testCurriculum(curriculumId) {
+            const data = window.curriculumData[curriculumId];
+            
+            if (!data) {
+                return { success: false, message: 'No data found' };
+            }
+            
+            // Check for required properties
+            const hasTitle = !!data.title;
+            const hasDescription = !!data.description;
+            const hasBeginner = !!data.beginner;
+            const hasIntermediate = !!data.intermediate;
+            const hasAdvanced = !!data.advanced;
+            
+            // Check beginner level
+            const beginnerValid = hasBeginner && 
+                                data.beginner.title && 
+                                data.beginner.content &&
+                                Array.isArray(data.beginner.skills);
+            
+            // Check intermediate level
+            const intermediateValid = hasIntermediate && 
+                                    data.intermediate.title && 
+                                    data.intermediate.content &&
+                                    Array.isArray(data.intermediate.skills);
+            
+            // Check advanced level
+            const advancedValid = hasAdvanced && 
+                                data.advanced.title && 
+                                data.advanced.content &&
+                                Array.isArray(data.advanced.skills);
+            
+            const allValid = hasTitle && hasDescription && beginnerValid && intermediateValid && advancedValid;
+            
+            return {
+                success: allValid,
+                message: allValid ? 'All levels present' : 'Missing data',
+                details: {
+                    title: hasTitle,
+                    description: hasDescription,
+                    beginner: beginnerValid,
+                    intermediate: intermediateValid,
+                    advanced: advancedValid
+                }
+            };
+        }
+
+        function runAllTests() {
+            const grid = document.getElementById('testGrid');
+            grid.innerHTML = '';
+            
+            let successCount = 0;
+            let failCount = 0;
+            
+            allCurriculumPages.forEach(curriculum => {
+                const result = testCurriculum(curriculum.id);
+                const card = document.createElement('div');
+                card.className = `test-card ${result.success ? 'success' : 'error'}`;
+                
+                card.innerHTML = `
+                    <div>
+                        <span class="status-icon">${result.success ? '✅' : '❌'}</span>
+                        <strong>${curriculum.name}</strong>
+                    </div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        <div>Page: ${curriculum.page}</div>
+                        <div>ID: ${curriculum.id}</div>
+                        <div>Status: ${result.message}</div>
+                        ${!result.success ? `
+                            <div style="margin-top: 0.5rem; font-size: 0.8rem;">
+                                ${result.details ? `
+                                    <div>Title: ${result.details.title ? '✓' : '✗'}</div>
+                                    <div>Desc: ${result.details.description ? '✓' : '✗'}</div>
+                                    <div>Beginner: ${result.details.beginner ? '✓' : '✗'}</div>
+                                    <div>Intermediate: ${result.details.intermediate ? '✓' : '✗'}</div>
+                                    <div>Advanced: ${result.details.advanced ? '✓' : '✗'}</div>
+                                ` : ''}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+                
+                if (result.success) {
+                    successCount++;
+                } else {
+                    failCount++;
+                }
+            });
+            
+            // Update summary
+            document.getElementById('total').textContent = allCurriculumPages.length;
+            document.getElementById('success').textContent = successCount;
+            document.getElementById('failed').textContent = failCount;
+        }
+
+        // Run tests on load
+        window.addEventListener('load', function() {
+            setTimeout(runAllTests, 500);
+        });
+    </script>
+</body>
+</html>

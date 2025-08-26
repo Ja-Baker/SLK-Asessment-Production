@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Curriculum Implementation</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-results {
+            margin: 2rem;
+            padding: 1rem;
+            border: 2px solid #b27ab4;
+            border-radius: 8px;
+        }
+        .test-pass {
+            color: #a0ce4e;
+            font-weight: bold;
+        }
+        .test-fail {
+            color: #ee4f9c;
+            font-weight: bold;
+        }
+        .curriculum-item {
+            padding: 0.5rem;
+            margin: 0.25rem;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test All 29 Curriculum Implementations</h1>
+        
+        <div class="test-results">
+            <h2>Test Results:</h2>
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script src="curriculum.js"></script>
+    <script>
+        // List of all 29 curriculums from the MD document
+        const expectedCurriculums = [
+            'earlyInteractions', 'analyticLanguage', 'gestaltLanguage', 'aacCurriculum',
+            'articulation', 'phonology', 'motorSpeech', 'mumbling', 'cyclesPhonology',
+            'followingDirections', 'askingAnswering', 'sequencing', 'abstractLanguage',
+            'grammarSyntax', 'vocabulary', 'literacyFoundations', 'cyclesLanguage',
+            'healthyVoice', 'voiceCurriculum', 'resonance', 'prosody',
+            'socialAwareness', 'emotionalRegulation', 'conversationalSkills', 'selectiveMutism',
+            'foundationsFluency', 'wordFinding', 'stuttering', 'cluttering'
+        ];
+
+        function testCurriculum(id) {
+            const curriculum = window.curriculumData[id];
+            if (!curriculum) return false;
+            
+            return curriculum.title && 
+                   curriculum.description && 
+                   curriculum.beginner && 
+                   curriculum.intermediate && 
+                   curriculum.advanced &&
+                   curriculum.beginner.skills && 
+                   curriculum.intermediate.skills && 
+                   curriculum.advanced.skills;
+        }
+
+        function runTests() {
+            const resultsDiv = document.getElementById('results');
+            let passCount = 0;
+            let failCount = 0;
+            let html = '';
+
+            expectedCurriculums.forEach((id, index) => {
+                const passed = testCurriculum(id);
+                if (passed) {
+                    passCount++;
+                    html += `<div class="curriculum-item">
+                        <span class="test-pass">✓</span> Page ${index + 14}: ${id} - 
+                        ${window.curriculumData[id]?.title || 'Unknown'}
+                    </div>`;
+                } else {
+                    failCount++;
+                    html += `<div class="curriculum-item">
+                        <span class="test-fail">✗</span> Page ${index + 14}: ${id} - MISSING or INCOMPLETE
+                    </div>`;
+                }
+            });
+
+            html = `
+                <h3>Summary:</h3>
+                <p class="test-pass">✓ Passed: ${passCount}/29</p>
+                ${failCount > 0 ? `<p class="test-fail">✗ Failed: ${failCount}/29</p>` : ''}
+                <hr>
+                <h3>Details:</h3>
+                ${html}
+            `;
+
+            resultsDiv.innerHTML = html;
+        }
+
+        // Run tests when page loads
+        window.onload = runTests;
+    </script>
+</body>
+</html>
