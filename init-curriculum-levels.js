@@ -99,74 +99,123 @@ window.addEventListener('load', function() {
         
         // Check if curriculum data exists and populate
         setTimeout(() => {
-            // Check for curriculum data from curriculum-content-2.js
-            if (window.curriculumContent) {
-                switch(pageId) {
-                    case 'abstractLanguage':
-                        if (window.curriculumContent.abstractLanguage) {
-                            populateCurriculumWithLevels(
-                                pageId,
-                                window.curriculumContent.abstractLanguage,
-                                'Abstract Language Curriculum',
-                                'This curriculum helps individuals understand and use figurative language, make inferences, and grasp non-literal meanings in communication.'
-                            );
-                        }
-                        break;
-                        
-                    case 'grammarSyntax':
-                        if (window.curriculumContent.grammarSyntax) {
-                            populateCurriculumWithLevels(
-                                pageId,
-                                window.curriculumContent.grammarSyntax,
-                                'Grammar & Syntax Curriculum',
-                                'This curriculum builds grammatical accuracy and sentence complexity through structured practice with grammar rules and sentence construction.'
-                            );
-                        }
-                        break;
-                        
-                    case 'vocabulary':
-                        if (window.curriculumContent.vocabulary) {
-                            populateCurriculumWithLevels(
-                                pageId,
-                                window.curriculumContent.vocabulary,
-                                'Vocabulary Curriculum',
-                                'This curriculum expands vocabulary knowledge and usage, helping individuals learn and use new words effectively in various contexts.'
-                            );
-                        }
-                        break;
-                        
-                    case 'literacyFoundations':
-                        if (window.curriculumContent.literacyFoundations) {
-                            populateCurriculumWithLevels(
-                                pageId,
-                                window.curriculumContent.literacyFoundations,
-                                'Language Foundations for Literacy Curriculum',
-                                'This curriculum develops the language skills that support reading and writing success, including phonological awareness, narrative skills, and academic vocabulary.'
-                            );
-                        }
-                        break;
-                        
-                    case 'cyclesLanguage':
-                        if (window.curriculumContent.cyclesLanguage) {
-                            populateCurriculumWithLevels(
-                                pageId,
-                                window.curriculumContent.cyclesLanguage,
-                                'Cycles Approach for Language Curriculum',
-                                'This curriculum uses a cyclical approach to address multiple language areas systematically, rotating through different skill areas to provide comprehensive language support.'
-                            );
-                        }
-                        break;
-                        
-                    case 'cyclesPhonology':
-                        if (window.curriculumContent.cyclesPhonology) {
-                            populateCurriculumWithLevels(
-                                pageId,
-                                window.curriculumContent.cyclesPhonology,
-                                'Cycles Approach for Phonology Curriculum',
-                                'This curriculum uses a cyclical approach to address multiple phonological processes, working on each pattern for short periods before cycling to the next.'
-                            );
-                        }
-                        break;
+            // Complete curriculum mapping for ALL pages
+            const curriculumMapping = {
+                // From curriculum-content-2.js
+                'abstractLanguage': {
+                    dataSource: 'curriculumContent',
+                    dataKey: 'abstractLanguage',
+                    title: 'Abstract Language Curriculum',
+                    description: 'This curriculum helps individuals understand and use figurative language, make inferences, and grasp non-literal meanings in communication.'
+                },
+                'grammarSyntax': {
+                    dataSource: 'curriculumContent',
+                    dataKey: 'grammarSyntax',
+                    title: 'Grammar & Syntax Curriculum',
+                    description: 'This curriculum builds grammatical accuracy and sentence complexity through structured practice with grammar rules and sentence construction.'
+                },
+                'vocabulary': {
+                    dataSource: 'curriculumContent',
+                    dataKey: 'vocabulary',
+                    title: 'Vocabulary Curriculum',
+                    description: 'This curriculum expands vocabulary knowledge and usage, helping individuals learn and use new words effectively in various contexts.'
+                },
+                'literacyFoundations': {
+                    dataSource: 'curriculumContent',
+                    dataKey: 'literacyFoundations',
+                    title: 'Language Foundations for Literacy Curriculum',
+                    description: 'This curriculum develops the language skills that support reading and writing success, including phonological awareness, narrative skills, and academic vocabulary.'
+                },
+                'cyclesLanguage': {
+                    dataSource: 'curriculumContent',
+                    dataKey: 'cyclesLanguage',
+                    title: 'Cycles Approach for Language Curriculum',
+                    description: 'This curriculum uses a cyclical approach to address multiple language areas systematically, rotating through different skill areas to provide comprehensive language support.'
+                },
+                'cyclesPhonology': {
+                    dataSource: 'curriculumContent',
+                    dataKey: 'cyclesPhonology',
+                    title: 'Cycles Approach for Phonology Curriculum',
+                    description: 'This curriculum uses a cyclical approach to address multiple phonological processes, working on each pattern for short periods before cycling to the next.'
+                },
+                
+                // From all-curriculum-data.js
+                'foundationsFluency': {
+                    dataSource: 'allCurriculumData',
+                    dataKey: 'foundationsFluency',
+                    title: 'Foundations for Fluency Curriculum',
+                    description: 'Fluent speech isn\'t just about getting words out smoothly—it\'s about having the physical control, emotional confidence, and flexibility to communicate effectively in any situation.'
+                },
+                'stuttering': {
+                    dataSource: 'allCurriculumData',
+                    dataKey: 'stuttering',
+                    title: 'Stuttering Curriculum',
+                    description: 'This curriculum provides structured strategies to support smoother, more confident communication for individuals who stutter.'
+                },
+                'wordFinding': {
+                    dataSource: 'allCurriculumData',
+                    dataKey: 'wordFinding',
+                    title: 'Word Finding/Word Retrieval Curriculum',
+                    description: 'This curriculum helps individuals who struggle with finding the right words, reducing hesitation and pauses due to word retrieval difficulties.'
+                },
+                'cluttering': {
+                    dataSource: 'allCurriculumData',
+                    dataKey: 'cluttering',
+                    title: 'Cluttering Curriculum',
+                    description: 'This curriculum addresses speech that tends to be too fast, disorganized, or difficult to understand, providing strategies to improve clarity and self-monitoring.'
+                },
+                
+                // From curriculum-pages-with-levels.js
+                'earlyInteractions': {
+                    dataSource: 'earlyInteractionsCurriculum',
+                    dataKey: null,
+                    title: 'Early Interactions Curriculum',
+                    description: 'This curriculum will encourage the individual to engage, respond, and participate in social interactions. Choose the level below that best fits this individual\'s current level.'
+                },
+                
+                // From all-curriculum-data.js - Additional curriculums
+                'analyticLanguage': {
+                    dataSource: 'allCurriculumData',
+                    dataKey: 'analyticLanguage',
+                    title: 'Analytic Language Processor Curriculum (First Words)',
+                    description: 'This curriculum is designed for children who learn language analytically, building vocabulary one word at a time and progressing through natural developmental stages.'
+                },
+                'gestaltLanguage': {
+                    dataSource: 'allCurriculumData',
+                    dataKey: 'gestaltLanguage',
+                    title: 'Gestalt Language Processor Curriculum (Shaping Echolalia)',
+                    description: 'This curriculum supports children who learn language in chunks (gestalts), using echolalia and scripts as stepping stones to self-generated speech.'
+                },
+                'aacCurriculum': {
+                    dataSource: 'allCurriculumData',
+                    dataKey: 'aacCurriculum',
+                    title: 'Early Augmentative/Alternative Communication (AAC) Curriculum',
+                    description: 'This curriculum provides comprehensive AAC support for individuals who use picture boards, speech-generating devices, or other alternative communication methods.'
+                }
+            };
+            
+            // Check if this page has curriculum data
+            if (curriculumMapping[pageId]) {
+                const mapping = curriculumMapping[pageId];
+                let curriculumData = null;
+                
+                // Get data from appropriate source
+                if (mapping.dataSource === 'curriculumContent' && window.curriculumContent) {
+                    curriculumData = window.curriculumContent[mapping.dataKey];
+                } else if (mapping.dataSource === 'allCurriculumData' && window.allCurriculumData) {
+                    curriculumData = window.allCurriculumData[mapping.dataKey];
+                } else if (mapping.dataSource === 'earlyInteractionsCurriculum' && window.earlyInteractionsCurriculum) {
+                    curriculumData = window.earlyInteractionsCurriculum;
+                }
+                
+                // Populate the curriculum page if data exists
+                if (curriculumData) {
+                    populateCurriculumWithLevels(
+                        pageId,
+                        curriculumData,
+                        mapping.title,
+                        mapping.description
+                    );
                 }
             }
             

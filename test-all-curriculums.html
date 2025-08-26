@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test All Curriculum Pages</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="nav-header">
+            <h1 class="site-title">Test All Curriculum Pages</h1>
+        </header>
+
+        <main id="content">
+            <div class="page active">
+                <h2>Testing ALL Curriculum Level Implementation</h2>
+                <p>Click the buttons below to test that ALL curriculum pages have the beginner/intermediate/advanced format:</p>
+                
+                <div class="button-group" style="flex-wrap: wrap; gap: 1rem;">
+                    <button class="secondary-btn" onclick="testCurriculum('earlyInteractions')">Early Interactions</button>
+                    <button class="secondary-btn" onclick="testCurriculum('analyticLanguage')">Analytic Language</button>
+                    <button class="secondary-btn" onclick="testCurriculum('gestaltLanguage')">Gestalt Language</button>
+                    <button class="secondary-btn" onclick="testCurriculum('aacCurriculum')">AAC</button>
+                    <button class="secondary-btn" onclick="testCurriculum('abstractLanguage')">Abstract Language</button>
+                    <button class="secondary-btn" onclick="testCurriculum('grammarSyntax')">Grammar/Syntax</button>
+                    <button class="secondary-btn" onclick="testCurriculum('vocabulary')">Vocabulary</button>
+                    <button class="secondary-btn" onclick="testCurriculum('literacyFoundations')">Literacy Foundations</button>
+                    <button class="secondary-btn" onclick="testCurriculum('cyclesLanguage')">Cycles Language</button>
+                    <button class="secondary-btn" onclick="testCurriculum('cyclesPhonology')">Cycles Phonology</button>
+                    <button class="secondary-btn" onclick="testCurriculum('foundationsFluency')">Foundations Fluency</button>
+                    <button class="secondary-btn" onclick="testCurriculum('stuttering')">Stuttering</button>
+                    <button class="secondary-btn" onclick="testCurriculum('wordFinding')">Word Finding</button>
+                    <button class="secondary-btn" onclick="testCurriculum('cluttering')">Cluttering</button>
+                </div>
+                
+                <div id="test-results" style="margin-top: 2rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
+                    <h3>Test Results:</h3>
+                    <div id="test-output">Click a curriculum button above to test...</div>
+                </div>
+                
+                <div id="summary" style="margin-top: 1rem; padding: 1rem; background: #e8f5e8; border-radius: 8px;">
+                    <h3>Implementation Status:</h3>
+                    <ul id="status-list">
+                        <li>Loading curriculum data...</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Load all curriculum scripts -->
+    <script src="curriculum-content-2.js"></script>
+    <script src="curriculum-pages-with-levels.js"></script>
+    <script src="all-curriculum-data.js"></script>
+    <script src="init-curriculum-levels.js"></script>
+    
+    <script>
+        // Test function
+        function testCurriculum(curriculumId) {
+            const output = document.getElementById('test-output');
+            
+            let result = `<h4>Testing: ${curriculumId}</h4>`;
+            let hasData = false;
+            let dataSource = 'None';
+            
+            // Check curriculum-content-2.js
+            if (window.curriculumContent && window.curriculumContent[curriculumId]) {
+                hasData = true;
+                dataSource = 'curriculum-content-2.js';
+                const data = window.curriculumContent[curriculumId];
+                result += `<p><strong>✅ Data found in:</strong> ${dataSource}</p>`;
+                result += `<ul>`;
+                result += `<li>Beginner: ${data.beginner ? '✅' : '❌'}</li>`;
+                result += `<li>Intermediate: ${data.intermediate ? '✅' : '❌'}</li>`;
+                result += `<li>Advanced: ${data.advanced ? '✅' : '❌'}</li>`;
+                result += `</ul>`;
+            }
+            
+            // Check all-curriculum-data.js
+            else if (window.allCurriculumData && window.allCurriculumData[curriculumId]) {
+                hasData = true;
+                dataSource = 'all-curriculum-data.js';
+                const data = window.allCurriculumData[curriculumId];
+                result += `<p><strong>✅ Data found in:</strong> ${dataSource}</p>`;
+                result += `<ul>`;
+                result += `<li>Beginner: ${data.beginner ? '✅' : '❌'}</li>`;
+                result += `<li>Intermediate: ${data.intermediate ? '✅' : '❌'}</li>`;
+                result += `<li>Advanced: ${data.advanced ? '✅' : '❌'}</li>`;
+                result += `</ul>`;
+            }
+            
+            // Check curriculum-pages-with-levels.js
+            else if (curriculumId === 'earlyInteractions' && window.earlyInteractionsCurriculum) {
+                hasData = true;
+                dataSource = 'curriculum-pages-with-levels.js';
+                const data = window.earlyInteractionsCurriculum;
+                result += `<p><strong>✅ Data found in:</strong> ${dataSource}</p>`;
+                result += `<ul>`;
+                result += `<li>Beginner: ${data.beginner ? '✅' : '❌'}</li>`;
+                result += `<li>Intermediate: ${data.intermediate ? '✅' : '❌'}</li>`;
+                result += `<li>Advanced: ${data.advanced ? '✅' : '❌'}</li>`;
+                result += `</ul>`;
+            }
+            
+            if (!hasData) {
+                result += `<p><strong>❌ No curriculum data found!</strong></p>`;
+            }
+            
+            output.innerHTML = result;
+        }
+        
+        // Check overall implementation status
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const statusList = document.getElementById('status-list');
+                let html = '';
+                
+                // Check what's available
+                html += `<li>curriculumContent: ${typeof window.curriculumContent !== 'undefined' ? '✅' : '❌'}</li>`;
+                html += `<li>allCurriculumData: ${typeof window.allCurriculumData !== 'undefined' ? '✅' : '❌'}</li>`;
+                html += `<li>earlyInteractionsCurriculum: ${typeof window.earlyInteractionsCurriculum !== 'undefined' ? '✅' : '❌'}</li>`;
+                
+                if (window.curriculumContent) {
+                    html += `<li>curriculum-content-2.js contains: ${Object.keys(window.curriculumContent).join(', ')}</li>`;
+                }
+                
+                if (window.allCurriculumData) {
+                    html += `<li>all-curriculum-data.js contains: ${Object.keys(window.allCurriculumData).join(', ')}</li>`;
+                }
+                
+                statusList.innerHTML = html;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
