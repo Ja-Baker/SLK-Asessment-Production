@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Curriculum Format</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Test Curriculum Format (Old Repository Style)</h1>
+        
+        <main id="content">
+            <div class="page active">
+                <!-- Curriculum content will be inserted here -->
+            </div>
+        </main>
+    </div>
+
+    <script src="curriculum.js"></script>
+    <script src="curriculum-formatted.js"></script>
+    <script>
+        // Test the curriculum rendering
+        window.onload = function() {
+            const activePage = document.querySelector('.page.active');
+            if (activePage) {
+                const curriculumContent = document.createElement('div');
+                curriculumContent.className = 'curriculum-content';
+                curriculumContent.innerHTML = renderCurriculumPage('earlyInteractions');
+                activePage.appendChild(curriculumContent);
+            }
+        };
+
+        // Override showSkillPage for testing
+        window.showSkillPage = function(skillId) {
+            alert(`Activity button clicked: ${skillId}\nThis would navigate to the ${skillId} skill page.`);
+        };
+    </script>
+</body>
+</html>
